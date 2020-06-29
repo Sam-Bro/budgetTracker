@@ -24,7 +24,7 @@ mongoose.connect("mongodb://localhost/budget", {
 require("./routes/api.js")(app);
 
 app.get('/', function(req, res){
-  res.redirect('./public/index.js');
+  res.redirect('./public/index.html');
 });
 
 app.listen(PORT, () => {
