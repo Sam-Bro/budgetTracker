@@ -21,7 +21,8 @@ mongoose.connect("mongodb://localhost/budget", {
 });
 
 // routes
-require("./routes/api.js")(app);
+require("./routes/apiRoutes.js")(app);
+require("./routes/htmlRoutes.js")(app);
 
 app.get('/', function(req, res){
   res.redirect('./public/index.html');

@@ -1,4 +1,6 @@
 const router = require("express").Router();
+
+module.exports = function (app) {
 const Transaction = require("../models/transaction.js");
 
 router.post("/api/transaction", ({body}, res) => {
@@ -30,5 +32,6 @@ router.get("/api/transaction", (req, res) => {
       res.status(404).json(err);
     });
 });
+}
 
 module.exports = router;
