@@ -1,13 +1,13 @@
-let transactions = [];
+let transaction = [];
 let myChart;
 
-fetch("/api/transaction")
+fetch("/api/transactions")
   .then(response => {
     return response.json();
   })
   .then(data => {
     // save db data on global variable
-    transactions = data;
+    transaction = data;
 
     populateTotal();
     populateTable();
@@ -16,7 +16,7 @@ fetch("/api/transaction")
 
 function populateTotal() {
   // reduce transaction amounts to a single total value
-  let total = transactions.reduce((total, t) => {
+  let total = transaction.reduce((total, t) => {
     return total + parseInt(t.value);
   }, 0);
 
@@ -28,7 +28,7 @@ function populateTable() {
   let tbody = document.querySelector("#tbody");
   tbody.innerHTML = "";
 
-  transactions.forEach(transaction => {
+  transaction.forEach(transaction => {
     // create and populate a table row
     let tr = document.createElement("tr");
     tr.innerHTML = `
@@ -42,7 +42,7 @@ function populateTable() {
 
 function populateChart() {
   // copy array and reverse it
-  let reversed = transactions.slice().reverse();
+  let reversed = transaction.slice().reverse();
   let sum = 0;
 
   // create date labels for chart
@@ -113,7 +113,7 @@ function sendTransaction(isAdding) {
   populateTotal();
   
   // also send to server
-  fetch("/api/transaction", {
+  fetch("/api/transactions", {
     method: "POST",
     body: JSON.stringify(transaction),
     headers: {
